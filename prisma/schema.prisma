@@ -14,10 +14,34 @@ datasource db {
 }
 
 model user {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   name       String
-  username   String   @unique @db.Char(20)
-  email      String   @unique
+  username   String    @unique @db.Char(20)
+  email      String    @unique
   password   String
-  created_at DateTime @default(now())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+}
+
+model category {
+  id         String    @id @default(uuid())
+  name       String
+  product    product[]
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@map("categories")
+}
+
+model product {
+  id          String    @id @default(uuid())
+  name        String
+  price       Float     @db.Double()
+  category_id String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @updatedAt
+
+  category category @relation(fields: [category_id], references: [id])
+
+  @@map("products")
 }
