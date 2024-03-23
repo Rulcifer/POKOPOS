@@ -5,14 +5,16 @@ const { notFoundResponse, successResponse, errorResponse } = require("../../help
 const route = express.Router();
 
 route.get('/', async (req, res) => {
+    const dataCategories = await getAllCategoriesWithItemCount()
+    console.log(dataCategories)
     try {
-        const dataCategories = await getAllCategoriesWithItemCount()
         if (!dataCategories[0]) {
             return notFoundResponse(res)
         }
 
         return successResponse(res, dataCategories)
     } catch (error) {
+        console.log(error)
         return errorResponse(res, error)
     }
 })

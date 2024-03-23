@@ -2,14 +2,15 @@ const prisma = require('../db');
 const { findCategories } = require('./category.repository');
 
 const getAllCategoriesWithItemCount = async () => {
-    const categories = await findCategories();
+    return await findCategories();
 
-    return categories[0].product
+    // const cek = categories
     const categoriesWithItemCount = categories.map(item => ({
         id: item.id,
         name: item.name,
-        itemCount: item.products.length,
+        itemCount: item.itemCount
     }))
+    return categoriesWithItemCount
 
 }
 
