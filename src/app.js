@@ -6,8 +6,8 @@ dotenv.config();
 
 const port = process.env.PORT
 
-const productController = require('./product/product.controller')
-const categoryController = require('./category/category.controller')
+const productController = require('./POS/product/product.controller')
+const categoryController = require('./POS/category/category.controller')
 
 app.use(express.json());
 app.get("/api", (req, res) => {
